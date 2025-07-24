@@ -1,0 +1,6 @@
+jackson-annotations-2.2.1.jar
+jackson-core-2.2.1.jar
+jackson-core-asl-1.8.8.jar
+jackson-databind-2.2.1.jar
+jackson-mapper-asl-1.8.8.jar
+jackson-module-jaxb-annotations-2.2.1.jar
