@@ -1,0 +1,68 @@
+package com.delicacy.client.management.datasource;
+
+import com.smartgwt.client.data.fields.*;
+import com.smartgwt.client.data.DataSourceField;
+import com.smartgwt.client.types.FieldType;
+import com.delicacy.client.data.KeyValueManager;
+import com.delicacy.client.data.DBDataSource;
+
+public class DSDepartmentRole extends DBDataSource
+{
+
+
+	public static DSDepartmentRole instance = null;
+
+	public static DSDepartmentRole getInstance() {
+		if(instance == null) {
+			instance = new DSDepartmentRole("DSDepartmentRole");
+		}
+		return instance;
+	}
+
+	private final DataSourceIntegerField departmentRoleIdField;
+	private final DataSourceIntegerField departmentIdField;
+	private final DataSourceIntegerField roleIdField;
+	private final DataSourceField detailRoleFunction;
+
+	public DSDepartmentRole(String dataSourceID) {
+
+		super();
+		setID(dataSourceID);
+		setActionMode(ACTION_MODE_TABLE);
+		setActionName("DepartmentRole");
+
+
+		departmentRoleIdField = new DataSourceIntegerField("departmentRoleId", "部门角色代码");
+		departmentRoleIdField.setLength(11);
+		departmentRoleIdField.setPrimaryKey(true);
+		departmentRoleIdField.setRequired(true);
+		departmentRoleIdField.setHidden(false);
+
+
+		departmentIdField = new DataSourceIntegerField("departmentId", "部门名称");
+		departmentIdField.setLength(11);
+		departmentIdField.setRequired(false);
+		departmentIdField.setHidden(false);
+//		departmentIdField.setValueMap(KeyValueManager.getValueMap("all_departments"));
+		KeyValueManager.loadValueMap("all_departments",departmentIdField);
+
+
+		roleIdField = new DataSourceIntegerField("roleId", "角色名称");
+		roleIdField.setLength(11);
+		roleIdField.setRequired(false);
+		roleIdField.setHidden(false);
+//		roleIdField.setValueMap(KeyValueManager.getValueMap("roles"));
+		KeyValueManager.loadValueMap("roles",roleIdField);
+
+		detailRoleFunction = new DataSourceField("detailRoleFunction", FieldType.ANY);
+		detailRoleFunction.setChildrenProperty(true);
+		detailRoleFunction.setChildTagName("RoleFunction");
+		detailRoleFunction.setRequired(false);
+		detailRoleFunction.setHidden(true);
+
+		setFields(departmentRoleIdField, departmentIdField, roleIdField, detailRoleFunction);
+	}
+
+
+}
+
